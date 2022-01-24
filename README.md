@@ -41,3 +41,5 @@ urlpatterns = [
 Django comes with a built-in, light-weight development server which can be used to run the app without setting up a server application.
 
 Just navigate to the project directory and run `python manage.py runserver` in your shell. You would see something like `Starting development server at <URL>`. Open `<URL>/mookit_downloader/` in your favourite browser to use the app.
+
+**NOTE**: Ignore the `unapplied migrations` warning when running the server.
