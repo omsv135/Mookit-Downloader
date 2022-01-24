@@ -18,8 +18,8 @@ ENV/
 env.bak/
 venv.bak/
 
-# IDE specific
-.idea
+# PyCharm files
+.idea/
 
 # Input output files
 *.zip
