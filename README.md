@@ -16,11 +16,11 @@ Django needs to be setup only once, after that all you need to do is start the s
 3. Start a Django project in the cloned repository by running `django-admin startproject myproject .`. _myproject_ can be replaced by any valid python identifier. Although, you’ll need to avoid naming projects after built-in Python or Django components. In particular, this means you should avoid using names like _django_ (which will conflict with Django itself) or _test_ (which conflicts with a built-in Python package).
 
 4. In the file `myproject/setting.py`, add `'mookit_downloader'` to the list `INSTALLED_APPS`. The final list looks like this:
-  ```python3
-  INSTALLED_APPS = [
-      'mookit_downloader',
-      ...
-  ]
+```python3
+INSTALLED_APPS = [
+   'mookit_downloader',
+   ...
+]
   ```
 
 5. In the file `myprojects/urls.py`, add `from django.urls import include` at the top of the file and `path('mookit_downloader/', include('mookit_downloader.urls')),` in the `urlpatterns` list. The final file looks like:
@@ -36,6 +36,8 @@ urlpatterns = [
   ...
 ]
 ```
+
+6. Create the Sessions database by running `python .\manage.py migrate sessions` in your shell.
 
 ## Running the Application
 Django comes with a built-in, light-weight development server which can be used to run the app without setting up a server application.
