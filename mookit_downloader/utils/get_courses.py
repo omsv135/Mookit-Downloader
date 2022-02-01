@@ -46,8 +46,5 @@ def get_courses(request, html):
         except AttributeError:
             pass
 
-    print(courses)  # debug
-    print(link_texts)  # debug
-
     request.session["course_codes"] = courses
     request.session["course_names"] = link_texts
