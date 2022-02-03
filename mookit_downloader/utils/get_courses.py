@@ -38,13 +38,4 @@ def get_courses(request, html):
     for link in links:
         courses.append(get_course_from_link(link))
 
-    # Obtain Course names from <h3> tag in every <a> tag
-    link_texts = []
-    for tag in link_tags:
-        try:
-            link_texts.append(str(tag.find("h3").string))
-        except AttributeError:
-            pass
-
     request.session["course_codes"] = courses
-    request.session["course_names"] = link_texts
