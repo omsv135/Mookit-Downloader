@@ -37,5 +37,5 @@ def login_action(request):
 
 
 def show_courses(request):
-    context = {"courses": str(request.session["course_codes"])}
+    context = {"course_codes": request.session[utils.COURSE_CODE_KEY]}
     return render(request, "mookit_downloader/courses.html", context)

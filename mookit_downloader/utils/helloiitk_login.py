@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from . import session_funcs
+from . import constants
 from .get_courses import get_courses
 
 
@@ -38,8 +39,8 @@ def login(request, uname, password):
     # Check login success and store info in django's session
     session_funcs.init_session(request)
     try:
-        request.session["uid"] = req_session.cookies["uid"]
-        request.session["token"] = req_session.cookies["token"]
+        request.session[constants.UID_KEY] = req_session.cookies["uid"]
+        request.session[constants.TOKEN_KEY] = req_session.cookies["token"]
 
         get_courses(request, res.content)
         return True

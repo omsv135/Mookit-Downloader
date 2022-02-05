@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from . import constants
 
 COURSES_DIV_ID = "block-views-block-courses-block-1"
 
@@ -38,4 +39,4 @@ def get_courses(request, html):
     for link in links:
         courses.append(get_course_from_link(link))
 
-    request.session["course_codes"] = courses
+    request.session[constants.COURSE_CODE_KEY] = courses
