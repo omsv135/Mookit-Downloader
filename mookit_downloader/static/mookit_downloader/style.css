@@ -56,8 +56,46 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #ddd;
+    cursor: pointer;
 }
 
 input[type="submit"]::selection {
+    background-color: #bbb;
+}
+
+.list {
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    padding: 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+h1 {
+    margin: 0 auto;
+}
+
+button {
+    display: block;
+    margin: 6px;
+    width: 100%;
+    background-color: #fff;
+    font-size: 16px;
+    height: max-content;
+    padding: 10px;
+    box-sizing: border-box;
+    border: thin solid rgba(0, 0, 0, 0.9);
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+button::selection {
     background-color: #bbb;
 }

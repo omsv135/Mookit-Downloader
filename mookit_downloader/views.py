@@ -37,5 +37,22 @@ def login_action(request):
 
 
 def show_courses(request):
-    context = {"courses": str(request.session["course_codes"])}
+    context = {"course_codes": request.session[utils.COURSE_CODE_KEY]}
     return render(request, "mookit_downloader/courses.html", context)
+
+
+def download_page(request, course_code):
+    context = {
+        "course_code": course_code.lower(),
+        "error": False,
+        "error_message": "Some error occurred",
+        "content": utils.get_course_content.get_content(request, course_code),
+    }
+
+    if context["content"] is False:
+        context["error"] = True
+    elif len(context["content"]) == 0:
+        context["error"] = True
+        context["error_message"] = "No content found"
+
+    return render(request, "mookit_downloader/download.html", context)

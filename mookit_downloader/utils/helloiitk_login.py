@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from . import session_funcs
+from . import constants
 from .get_courses import get_courses
 
 
@@ -12,8 +13,6 @@ def login(request, uname, password):
     @param password: password received from form
     @return: boolean indicating success of login
     """
-    BASE_URL = "https://hello.iitk.ac.in/"
-    LOGIN_ACTION = "index.php/user/login"
 
     # Create requests session
     req_session = requests.Session()
@@ -27,19 +26,19 @@ def login(request, uname, password):
     }
 
     # Get BUILD ID
-    res = req_session.get(BASE_URL + LOGIN_ACTION)
+    res = req_session.get(constants.LOGIN_URL)
     soup = BeautifulSoup(res.content, "html.parser")
     build_ID = soup.find(attrs={"name": "form_build_id"}).get("value")
     payload["form_build_id"] = build_ID
 
     # Send POST request
-    res = req_session.post(BASE_URL + LOGIN_ACTION, data=payload)
+    res = req_session.post(constants.LOGIN_URL, data=payload)
 
     # Check login success and store info in django's session
     session_funcs.init_session(request)
     try:
-        request.session["uid"] = req_session.cookies["uid"]
-        request.session["token"] = req_session.cookies["token"]
+        request.session[constants.UID_KEY] = req_session.cookies["uid"]
+        request.session[constants.TOKEN_KEY] = req_session.cookies["token"]
 
         get_courses(request, res.content)
         return True
