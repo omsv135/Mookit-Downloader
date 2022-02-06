@@ -1,10 +1,24 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>My Courses</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'mookit_downloader/style.css' %}">
 </head>
 <body>
-<p> {{ courses }} </p>
+<div class="wrapper">
+    <div class="list">
+        <h1>My Courses</h1>
+        {% if course_codes|length >= 1 %}
+            {% for code in course_codes %}
+                <button type="submit" onclick="location.href='{% url 'mookit_downloader:download_page' code %}'">{{ code.upper }}</button>
+            {% endfor %}
+        {% else %}
+            <p>There are no Courses.</p>
+        {% endif %}
+    </div>
+</div>
 </body>
 </html>

@@ -1,3 +1,5 @@
 UID_KEY = "uid"
 TOKEN_KEY = "token"
 COURSE_CODE_KEY = "course_codes"
+LOGIN_URL = "https://hello.iitk.ac.in/index.php/user/login"
+API_URL = "https://hello.iitk.ac.in/api/"
