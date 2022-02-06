@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ course_code.upper }} - Content</title>
+</head>
+<body>
+{% if error %}
+    <h2 style="color: red">{{ error_message }}</h2>
+{% else %}
+    <p>{{ content }}</p>
+{% endif %}
+</body>
+</html>
