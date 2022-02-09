@@ -3,6 +3,28 @@ from . import session_funcs
 from . import constants
 
 
+def group_the_weeks(entries):
+    """
+    Groups the content of same week into a list, returning a 2-D array.
+    @param entries: Array of data entries
+    @return: 2-D array
+    """
+    week_names = []
+    for entry in entries:
+        if entry["week"] not in week_names:
+            week_names.append(entry["week"])
+
+    segregated_entries = []
+    for week_name in week_names:
+        same_week = []
+        for entry in entries:
+            if week_name == entry["week"]:
+                same_week.append(entry)
+        segregated_entries.append(same_week)
+
+    return segregated_entries
+
+
 def get_content(request, course_code):
     """
     Retrieves the course content from the Mookit API
@@ -28,7 +50,7 @@ def get_content(request, course_code):
                 "resources": entry["resources"],
             }
             entries.append(data)
-        return entries
+        return group_the_weeks(entries)
     except Exception as e:
         print("The following exception occurred:", e, sep="\n")
         session_funcs.clear_session(request)
