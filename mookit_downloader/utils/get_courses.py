@@ -1,8 +1,6 @@
 from bs4 import BeautifulSoup
 from . import constants
 
-COURSES_DIV_ID = "block-views-block-courses-block-1"
-
 
 def get_course_from_link(link):
     """
@@ -28,7 +26,7 @@ def get_courses(request, html):
     soup = BeautifulSoup(html, "html.parser")
 
     # Find the <a> tag which contain link to courses
-    courses_div = soup.find(id=COURSES_DIV_ID)
+    courses_div = soup.find(id=constants.COURSES_DIV_ID)
     link_tags = courses_div.find_all("a")
 
     # Obtain the links from <a> tags
