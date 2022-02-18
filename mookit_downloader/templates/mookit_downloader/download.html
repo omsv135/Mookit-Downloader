@@ -1,14 +1,53 @@
+{% load static %}
+{% load dict_value %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{ course_code.upper }} - Content</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'mookit_downloader/download_page.css' %}">
 </head>
 <body>
+<div class="main">
 {% if error %}
     <h2 style="color: red">{{ error_message }}</h2>
 {% else %}
-    <p>{{ content }}</p>
+    {% for week_name in content.keys %}
+        <div class="week-content">
+            <div class="week-header">
+                <div class="week-name">
+                    <p>{{ week_name.upper }}</p>
+                </div>
+            </div>
+            <div>
+                {% for entry in content|dictvaluefromkey:week_name %}
+                    <div class="entry-content">
+                        <p class="entry-title">{{ entry.topic }} - {{ entry.title }}</p>
+                        <div class="entry-video-div">
+                            <p class="entry-video">Video Links: </p>
+                            {% for vid_dict in entry.vidURL %}
+                                <a href="{{ vid_dict.path }}" target="_blank" class="entry-link">{{ vid_dict.type }}</a>
+                            {% endfor %}
+                        </div>
+                        {% if entry.resources %}
+                            <div class="entry-files-div">
+                                <p class="entry-file">Files: </p>
+                                <ul class="entry-files-list">
+                                    {% for file_dict in entry.resources %}
+                                        <li><a href="{{ file_dict.fileURL }}" class="entry-link" style="display: block"
+                                               target="_blank">
+                                            {{ file_dict.fileName }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
 {% endif %}
+</div>
 </body>
 </html>
