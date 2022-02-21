@@ -37,11 +37,22 @@ def login_action(request):
 
 
 def show_courses(request):
+    """
+    The page that shows the courses
+    @param request: HttpRequest object
+    @return: HttpResponse object
+    """
     context = {"course_codes": request.session[utils.COURSE_CODE_KEY]}
     return render(request, "mookit_downloader/courses.html", context)
 
 
 def download_page(request, course_code):
+    """
+    The page showing download links to content
+    @param request: HttpRequest object
+    @param course_code: String containing course code passed in URL
+    @return: HttpResponse object
+    """
     context = {
         "course_code": course_code.lower(),
         "error": False,
